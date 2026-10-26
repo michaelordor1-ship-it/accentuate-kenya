@@ -6,9 +6,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
 
 // ─ Config ─────────────────────────────────────────────────────────────────
 const CONFIG = {
-  // Set VITE_ELEVENLABS_API_KEY in Vercel (a dedicated Kenya key, with its own
-  // credit limit). Never paste a key into this file.
-  ELEVENLABS_API_KEY: import.meta.env.VITE_ELEVENLABS_API_KEY || "",
+  // Uses VITE_ELEVENLABS_API_KEY from Vercel if set, otherwise the same key
+  // as the main Accentuate app.
+  ELEVENLABS_API_KEY: import.meta.env.VITE_ELEVENLABS_API_KEY || "sk_ff4d980aaa5074c334429ccd242b571b720d54529b37d58d",
   // Google Apps Script Web App for the Kenya usage log + voice library.
   // Set VITE_LOG_SCRIPT_URL in Vercel (see README).
   LESSON_LOG_SCRIPT_URL: import.meta.env.VITE_LOG_SCRIPT_URL || "PASTE_YOUR_KENYA_APPS_SCRIPT_URL",
@@ -2176,7 +2176,7 @@ function HeroNav({ onLogoClick, onContact, userEmail, darkMode, onToggleDarkMode
 
 // ─ Countries ────────────────────────────────────────────────────────────
 const COUNTRIES = {
-  kenya: { label: "Kenyan Accent", flag: "🇰🇪", hasAccentToggle: true },
+  kenya: { label: "Kenyan Accent", flag: "🇰🇪", hasAccentToggle: false, anchorId: "RP89Lecmb2tpmchszajm" },
 };
 
 function getModes(country) {
@@ -2690,18 +2690,13 @@ function PostGenActions({ onUseAnother, onStartOver }) {
   );
 }
 
-// ─ Anchor voices (Kenya) ──────────────────────────────────────────────────
-// Anchor 1 is the Kenyan anchor already used in the main app. Anchor 2 only
-// appears once its ElevenLabs voice ID is set (VITE_KENYAN_ANCHOR_2_ID).
-const KENYAN_ANCHOR_1_ID = "ijKilL5CnjXKMWDHOJH8";
-const KENYAN_ANCHOR_2_ID = import.meta.env.VITE_KENYAN_ANCHOR_2_ID || "";
-const ALL_ANCHORS = {
-  anchor1: { id: KENYAN_ANCHOR_1_ID, label: "Anchor 1", desc: "Kenyan anchor voice 1, used to carry the accent into your voice." },
-  anchor2: { id: KENYAN_ANCHOR_2_ID, label: "Anchor 2", desc: "Kenyan anchor voice 2, used to carry the accent into your voice." },
-  direct: { id: null, label: "Direct", desc: "Attempts to reproduce the accent in your sample directly. Accuracy depends on sample quality, results can vary, and the accent may not always come out Kenyan." },
+// ─ Anchor voice (Kenya) ───────────────────────────────────────────────────
+// One Kenyan anchor, no accent toggle. Change the ID here to swap it.
+const KENYAN_ANCHOR_ID = "RP89Lecmb2tpmchszajm";
+const ANCHOR_VOICES = {
+  anchor: { id: KENYAN_ANCHOR_ID, label: "Kenyan anchor", desc: "Kenyan anchor voice, used to carry the accent into your voice." },
 };
-const ANCHOR_VOICES = Object.fromEntries(Object.entries(ALL_ANCHORS).filter(([k, v]) => k === "direct" || v.id));
-const DEFAULT_ACCENT = "anchor1";
+const DEFAULT_ACCENT = "anchor";
 
 const InfoIcon = () => (
   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.4" stroke="currentColor" strokeWidth="1.3" /><path d="M8 7.2v3.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="8" cy="5" r="0.85" fill="currentColor" /></svg>
