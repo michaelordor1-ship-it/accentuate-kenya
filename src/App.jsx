@@ -2176,7 +2176,7 @@ function HeroNav({ onLogoClick, onContact, userEmail, darkMode, onToggleDarkMode
 
 // ─ Countries ────────────────────────────────────────────────────────────
 const COUNTRIES = {
-  kenya: { label: "Kenyan Accent", flag: "🇰🇪", hasAccentToggle: false, anchorId: "RP89Lecmb2tpmchszajm" },
+  kenya: { label: "Kenyan Accent", flag: "🇰🇪", hasAccentToggle: true },
 };
 
 function getModes(country) {
@@ -2690,13 +2690,12 @@ function PostGenActions({ onUseAnother, onStartOver }) {
   );
 }
 
-// ─ Anchor voice (Kenya) ───────────────────────────────────────────────────
-// One Kenyan anchor, no accent toggle. Change the ID here to swap it.
-const KENYAN_ANCHOR_ID = "RP89Lecmb2tpmchszajm";
+// ─ Anchor voices (Kenya) ──────────────────────────────────────────────────
 const ANCHOR_VOICES = {
-  anchor: { id: KENYAN_ANCHOR_ID, label: "Kenyan anchor", desc: "Kenyan anchor voice, used to carry the accent into your voice." },
+  anchor1: { id: "RP89Lecmb2tpmchszajm", label: "Anchor 1", desc: "Kenyan anchor voice 1, used to carry the accent into your voice." },
+  anchor2: { id: "uLfPT2jUO3X81OwnftBP", label: "Anchor 2", desc: "Kenyan anchor voice 2, used to carry the accent into your voice." },
 };
-const DEFAULT_ACCENT = "anchor";
+const DEFAULT_ACCENT = "anchor1";
 
 const InfoIcon = () => (
   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.4" stroke="currentColor" strokeWidth="1.3" /><path d="M8 7.2v3.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="8" cy="5" r="0.85" fill="currentColor" /></svg>
